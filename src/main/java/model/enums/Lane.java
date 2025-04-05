@@ -19,11 +19,9 @@ public enum Lane {
     // WEST
     WEST_RIGHT,
     WEST_STRAIGHT,
-    WEST_LEFT,
+    WEST_LEFT;
 
-    UNDEFINED;
-
-    public static Lane stringToLane(String start, String end) {
+    public static Lane stringToLane(String start, String end) throws IllegalArgumentException {
         return switch (start + " " + end) {
             case "north west" -> NORTH_RIGHT;
             case "north south" -> NORTH_STRAIGHT;
@@ -41,7 +39,36 @@ public enum Lane {
             case "west east" -> WEST_STRAIGHT;
             case "west north", "west west" -> WEST_LEFT;
 
-            default -> UNDEFINED;
+            default -> throw new IllegalArgumentException(
+                String.format("Couldn't parse startRoad=%s, endRoad=%s", start, end)
+            );
         };
+    }
+
+    public Move getMove() {
+        return Move.fromInteger(this.ordinal() % Move.count());
+    }
+
+    public Direction getDirection() {
+        return Direction.fromInteger(this.ordinal() / Move.count());
+    }
+
+    public boolean collide(Lane other) {
+        if (this.getDirection().are_opposite(other.getDirection())) {
+            return (this.getMove() == Move.LEFT && other.getMove() != Move.LEFT) ||
+                    (this.getMove() != Move.LEFT && other.getMove() == Move.LEFT);
+        } else {
+            Move previousLaneMove = this.getMove();
+            Move nextLaneMove = other.getMove();
+
+            if (this.getDirection().is_previous(other.getDirection())) {
+                Move tmp = previousLaneMove;
+                previousLaneMove = nextLaneMove;
+                nextLaneMove = tmp;
+            }
+
+            return (nextLaneMove == Move.STRAIGHT) ||
+                    (nextLaneMove == Move.LEFT && previousLaneMove == Move.LEFT);
+        }
     }
 }
