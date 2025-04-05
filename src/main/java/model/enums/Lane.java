@@ -68,7 +68,7 @@ public enum Lane {
             }
 
             return (nextLaneMove == Move.STRAIGHT) ||
-                    (nextLaneMove == Move.LEFT && previousLaneMove == Move.LEFT);
+                    (nextLaneMove == Move.LEFT && (previousLaneMove != Move.RIGHT));
         }
     }
 }
