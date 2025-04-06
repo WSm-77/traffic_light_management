@@ -54,10 +54,14 @@ public enum Lane {
     }
 
     public boolean collide(Lane other) {
-        if (this.getDirection().are_opposite(other.getDirection())) {
+        if (this.getDirection() == other.getDirection()) {
+            return false;
+        }
+        else if (this.getDirection().are_opposite(other.getDirection())) {
             return (this.getMove() == Move.LEFT && other.getMove() != Move.LEFT) ||
                     (this.getMove() != Move.LEFT && other.getMove() == Move.LEFT);
-        } else {
+        }
+        else {
             Move previousLaneMove = this.getMove();
             Move nextLaneMove = other.getMove();
 

@@ -1,9 +1,11 @@
 package model.graphs;
 
+import model.enums.Lane;
+
 import java.util.*;
 
-public class Graph {
-    private final Map<Vertex, Set<Vertex>> graphMap = new HashMap<>();
+public class Graph<VertexType> {
+    private final Map<VertexType, Set<VertexType>> graphMap = new HashMap<>();
 
     /**
      * Adds directed edge between given vertices
@@ -11,7 +13,7 @@ public class Graph {
      * @param vertex The beginning of an edge
      * @param neighbour The end of an edge
      */
-    public void addDirectedEdge(Vertex vertex, Vertex neighbour) {
+    public void addDirectedEdge(VertexType vertex, VertexType neighbour) {
         if ( ! graphMap.containsKey(vertex)) {
             graphMap.put(vertex, new HashSet<>());
         }
@@ -29,12 +31,12 @@ public class Graph {
      * @param vertex1 First vertex
      * @param vertex2 Second vertex
      */
-    public void addEdge(Vertex vertex1, Vertex vertex2) {
+    public void addEdge(VertexType vertex1, VertexType vertex2) {
         this.addDirectedEdge(vertex1, vertex2);
         this.addDirectedEdge(vertex2, vertex1);
     }
 
-    public void addVertex(Vertex vertex) {
+    public void addVertex(VertexType vertex) {
         if (this.graphMap.containsKey(vertex)) {
             return;
         }
@@ -42,15 +44,44 @@ public class Graph {
         this.graphMap.put(vertex, new HashSet<>());
     }
 
-    public Set<Vertex> getVertices() {
+    public Set<VertexType> getVertices() {
         return this.graphMap.keySet();
     }
 
-    public Set<Vertex> getNeighbours(Vertex vertex) throws IllegalArgumentException {
+    public Set<VertexType> getNeighbours(VertexType vertex) throws IllegalArgumentException {
         if ( ! this.graphMap.containsKey(vertex)) {
-            throw new IllegalArgumentException(String.format("Vertex of id: %s does not exist!!!", vertex.id().name()));
+            throw new IllegalArgumentException(String.format("Vertex %s does not exist!!!", vertex));
         }
 
         return Collections.unmodifiableSet(this.graphMap.get(vertex));
+    }
+
+    public boolean containsEdge(VertexType vertex, VertexType neighbour) {
+        if ( ! this.graphMap.containsKey(vertex)) {
+            return false;
+        }
+
+        return this.graphMap.get(vertex).contains(neighbour);
+    }
+
+    public static Graph<Vertex<Lane>> fromLanes(List<Vertex<Lane>> lanesList) {
+        int lanesCount = lanesList.size();
+        Graph<Vertex<Lane>> graph = new Graph<>();
+
+        for (int vertexId = 0; vertexId < lanesCount; vertexId++) {
+            Vertex<Lane> vertex = lanesList.get(vertexId);
+            Lane vertexLane = vertex.id();
+
+            for (int neighbourId = vertexId + 1; neighbourId < lanesCount; neighbourId++) {
+                Vertex<Lane> neighbour = lanesList.get(neighbourId);
+                Lane neighbourLane = neighbour.id();
+
+                if ( ! vertexLane.collide(neighbourLane)) {
+                    graph.addEdge(vertex, neighbour);
+                }
+            }
+        }
+
+        return graph;
     }
 }

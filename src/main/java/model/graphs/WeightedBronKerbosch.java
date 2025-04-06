@@ -94,9 +94,6 @@ public class WeightedBronKerbosch {
 
     private int weightedDegree(Vertex vertex) {
         return vertex.weight();
-//                this.graph.getNeighbours(vertex).stream()
-//                        .mapToInt(Vertex::weight)
-//                        .sum();
     }
 
     private Vertex choosePivotVertex(Set<Vertex> prospective) {
