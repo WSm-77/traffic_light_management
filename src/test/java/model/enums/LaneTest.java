@@ -62,6 +62,25 @@ class LaneTest {
     }
 
     @Test
+    void collide_SameDirections() {
+        assertFalse(Lane.NORTH_RIGHT.collide(Lane.NORTH_STRAIGHT));
+        assertFalse(Lane.NORTH_RIGHT.collide(Lane.NORTH_LEFT));
+        assertFalse(Lane.NORTH_STRAIGHT.collide(Lane.NORTH_LEFT));
+
+        assertFalse(Lane.EAST_RIGHT.collide(Lane.EAST_STRAIGHT));
+        assertFalse(Lane.EAST_RIGHT.collide(Lane.EAST_LEFT));
+        assertFalse(Lane.EAST_STRAIGHT.collide(Lane.EAST_LEFT));
+
+        assertFalse(Lane.SOUTH_RIGHT.collide(Lane.SOUTH_STRAIGHT));
+        assertFalse(Lane.SOUTH_RIGHT.collide(Lane.SOUTH_LEFT));
+        assertFalse(Lane.SOUTH_STRAIGHT.collide(Lane.SOUTH_LEFT));
+
+        assertFalse(Lane.WEST_RIGHT.collide(Lane.WEST_STRAIGHT));
+        assertFalse(Lane.WEST_RIGHT.collide(Lane.WEST_LEFT));
+        assertFalse(Lane.WEST_STRAIGHT.collide(Lane.WEST_LEFT));
+    }
+
+    @Test
     void collide_OppositeDirections() {
         // turn right
         assertTrue(Lane.NORTH_LEFT.collide(Lane.SOUTH_RIGHT));
@@ -107,6 +126,5 @@ class LaneTest {
         assertTrue(Lane.SOUTH_STRAIGHT.collide(Lane.WEST_LEFT));
         assertFalse(Lane.SOUTH_STRAIGHT.collide(Lane.WEST_RIGHT));
         assertTrue(Lane.SOUTH_STRAIGHT.collide(Lane.WEST_STRAIGHT));
-
     }
 }
