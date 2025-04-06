@@ -26,7 +26,7 @@ class WeightedBronKerboschTest {
         graph.addEdge(v2, v4);
 
         WeightedBronKerbosch algorithm = new WeightedBronKerbosch(graph);
-        Set<Vertex> maxClique = algorithm.findMaximumWeightClique();
+        Set<Vertex<Lane>> maxClique = algorithm.findMaximumWeightClique();
 
         assertEquals(4, maxClique.size());
         assertTrue(maxClique.contains(v1));
@@ -53,7 +53,7 @@ class WeightedBronKerboschTest {
         graph.addEdge(v4, v5);
 
         WeightedBronKerbosch algorithm = new WeightedBronKerbosch(graph);
-        Set<Vertex> maxClique = algorithm.findMaximumWeightClique();
+        Set<Vertex<Lane>> maxClique = algorithm.findMaximumWeightClique();
 
         assertEquals(2, maxClique.size());
         assertTrue(maxClique.contains(v2));
@@ -64,7 +64,7 @@ class WeightedBronKerboschTest {
     void findMaximumWeightClique_EmptyGraph() {
         Graph<Vertex<Lane>> graph = new Graph<>();
         WeightedBronKerbosch algorithm = new WeightedBronKerbosch(graph);
-        Set<Vertex> maxClique = algorithm.findMaximumWeightClique();
+        Set<Vertex<Lane>> maxClique = algorithm.findMaximumWeightClique();
 
         assertTrue(maxClique.isEmpty());
     }
@@ -76,7 +76,7 @@ class WeightedBronKerboschTest {
         graph.addVertex(v1);
 
         WeightedBronKerbosch algorithm = new WeightedBronKerbosch(graph);
-        Set<Vertex> maxClique = algorithm.findMaximumWeightClique();
+        Set<Vertex<Lane>> maxClique = algorithm.findMaximumWeightClique();
 
         assertEquals(1, maxClique.size());
         assertTrue(maxClique.contains(v1));
@@ -96,7 +96,7 @@ class WeightedBronKerboschTest {
         graph.addVertex(v4);
 
         WeightedBronKerbosch algorithm = new WeightedBronKerbosch(graph);
-        Set<Vertex> maxClique = algorithm.findMaximumWeightClique();
+        Set<Vertex<Lane>> maxClique = algorithm.findMaximumWeightClique();
 
         assertEquals(1, maxClique.size());
         assertTrue(maxClique.contains(v4));
