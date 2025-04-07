@@ -70,6 +70,7 @@ public class Graph<VertexType> {
 
         for (int vertexId = 0; vertexId < lanesCount; vertexId++) {
             Vertex<Lane> vertex = lanesList.get(vertexId);
+            graph.addVertex(vertex);
             Lane vertexLane = vertex.id();
 
             for (int neighbourId = vertexId + 1; neighbourId < lanesCount; neighbourId++) {
