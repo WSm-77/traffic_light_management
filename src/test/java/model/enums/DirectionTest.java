@@ -23,7 +23,7 @@ class DirectionTest {
     }
 
     @Test
-    void testFromInteger_ValidValues() {
+    void fromInteger_ValidValues() {
         assertEquals(Direction.NORTH, Direction.fromInteger(0));
         assertEquals(Direction.EAST, Direction.fromInteger(1));
         assertEquals(Direction.SOUTH, Direction.fromInteger(2));
@@ -31,7 +31,7 @@ class DirectionTest {
     }
 
     @Test
-    void testFromInteger_InvalidNegativeValue() {
+    void fromInteger_InvalidNegativeValue() {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> Direction.fromInteger(-1)
@@ -39,7 +39,7 @@ class DirectionTest {
     }
 
     @Test
-    void testFromInteger_InvalidLargeValue() {
+    void fromInteger_InvalidLargeValue() {
         int invalidIndex = Direction.count();
         assertThrows(
                 IllegalArgumentException.class,
@@ -48,12 +48,12 @@ class DirectionTest {
     }
 
     @Test
-    void testCount() {
+    void count() {
         assertEquals(4, Direction.count());
     }
 
     @Test
-    void testAreOpposite() {
+    void areOpposite() {
         assertTrue(Direction.NORTH.are_opposite(Direction.SOUTH));
         assertTrue(Direction.SOUTH.are_opposite(Direction.NORTH));
         assertTrue(Direction.EAST.are_opposite(Direction.WEST));
@@ -65,7 +65,7 @@ class DirectionTest {
     }
 
     @Test
-    void testIsPrevious() {
+    void isPrevious() {
         assertTrue(Direction.NORTH.is_previous(Direction.WEST));
         assertTrue(Direction.EAST.is_previous(Direction.NORTH));
         assertTrue(Direction.SOUTH.is_previous(Direction.EAST));
