@@ -14,10 +14,6 @@ public class Road {
         this.trafficLaneList = trafficLaneList;
     }
 
-    public void addTrafficLane(TrafficLane trafficLane) {
-        this.trafficLaneList.add(trafficLane);
-    }
-
     public Direction getDirection() {
         return this.direction;
     }
