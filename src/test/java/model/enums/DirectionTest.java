@@ -7,6 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class DirectionTest {
 
     @Test
+    void fromString_ValidValues() {
+        assertEquals(Direction.NORTH, Direction.fromString("north"));
+        assertEquals(Direction.EAST, Direction.fromString("east"));
+        assertEquals(Direction.SOUTH, Direction.fromString("south"));
+        assertEquals(Direction.WEST, Direction.fromString("west"));
+    }
+
+    @Test
+    void fromString_InvalidValue() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> Direction.fromString("invalid")
+        );
+    }
+
+    @Test
     void testFromInteger_ValidValues() {
         assertEquals(Direction.NORTH, Direction.fromInteger(0));
         assertEquals(Direction.EAST, Direction.fromInteger(1));

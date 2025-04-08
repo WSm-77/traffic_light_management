@@ -6,6 +6,16 @@ public enum Direction {
     SOUTH,
     WEST;
 
+    public static Direction fromString(String direction) {
+        return switch (direction) {
+            case "north" -> NORTH;
+            case "east" -> EAST;
+            case "south" -> SOUTH;
+            case "west" -> WEST;
+            default -> throw new IllegalArgumentException(String.format("Unknown direction: %s", direction));
+        };
+    }
+
     public static Direction fromInteger(int value) throws IllegalArgumentException {
         Direction[] directionValues = Direction.values();
         if (value < 0 || value >= directionValues.length) {
