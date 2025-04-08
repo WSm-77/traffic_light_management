@@ -64,6 +64,13 @@ public class Graph<VertexType> {
         return this.graphMap.get(vertex).contains(neighbour);
     }
 
+    /**
+     * Creates weighted graph from Vertices list. Vertices of result graph are Lanes with weight of vehicles count which
+     * occupy these Lanes. Edges are created only between vertices that contain non-colliding Lanes.
+     *
+     * @param lanesList List of Vertex Objects that create graph
+     * @return Graph
+     */
     public static Graph<Vertex<Lane>> fromLanes(List<Vertex<Lane>> lanesList) {
         int lanesCount = lanesList.size();
         Graph<Vertex<Lane>> graph = new Graph<>();
@@ -84,5 +91,10 @@ public class Graph<VertexType> {
         }
 
         return graph;
+    }
+
+    @Override
+    public String toString() {
+        return this.graphMap.toString();
     }
 }

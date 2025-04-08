@@ -14,6 +14,11 @@ public class WeightedBronKerbosch {
         this.graph = graph;
     }
 
+    /**
+     * Finds clique with maximum sum of vertices weights
+     *
+     * @return Set of vertices creating maximum weight clique
+     */
     public Set<Vertex<Lane>> findMaximumWeightClique() {
         Set<Vertex<Lane>> currentClique = new HashSet<>();
         Set<Vertex<Lane>> prospective = this.graph.getVertices();
@@ -25,7 +30,7 @@ public class WeightedBronKerbosch {
     }
 
     /**
-     * Recursive Bron-Kerbosch algorithm with pivoting for Maximum Vertex<Lane></>-Weighted Clique.
+     * Recursive Bron-Kerbosch algorithm with pivoting for Maximum Vertex-Weighted Clique.
      *
      * @param currentClique Current clique
      * @param prospective Prospective vertices that can extend the current clique
@@ -44,8 +49,7 @@ public class WeightedBronKerbosch {
             return;
         }
 
-        if ( ! prospective.isEmpty() && this.calculateCliqueWeight(currentClique) +
-                this.estimateRemainingWeight(prospective) > this.maxCliqueWeight) {
+        if ( ! prospective.isEmpty()) {
             // select pivot
             Vertex<Lane> pivot = this.choosePivotVertex(prospective);
             Set<Vertex<Lane>> pivotNeighbours = this.graph.getNeighbours(pivot);
@@ -77,6 +81,12 @@ public class WeightedBronKerbosch {
         }
     }
 
+    /**
+     * Calculates the total weight of a given set of vertices that create clique.
+     *
+     * @param vertices The set of vertices creating clique.
+     * @return The total weight of the vertices, or 0 if the set is empty.
+     */
     private int calculateCliqueWeight(Set<Vertex<Lane>> vertices) {
         if (vertices.isEmpty()) {
             return 0;
@@ -87,17 +97,12 @@ public class WeightedBronKerbosch {
                 .sum();
     }
 
-    private int estimateRemainingWeight(Set<Vertex<Lane>> vertices) {
-        return vertices.stream()
-                .mapToInt(this::weightedDegree)
-                .max()
-                .orElse(0);
-    }
-
-    private int weightedDegree(Vertex<Lane> vertex) {
-        return vertex.weight();
-    }
-
+    /**
+     * Chooses the pivot vertex with the maximum weight from a set of prospective vertices.
+     *
+     * @param prospective The non-empty set of vertices to choose the pivot from.
+     * @return The vertex with the maximum weight.
+     */
     private Vertex<Lane> choosePivotVertex(Set<Vertex<Lane>> prospective) {
         return prospective.stream()
                 .max((vertex1, vertex2) -> Integer.compare(vertex1.weight(), vertex2.weight()))
