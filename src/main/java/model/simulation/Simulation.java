@@ -13,6 +13,7 @@ import java.util.*;
 
 public class Simulation {
     private final Map<Direction, Road> roadsMap = new HashMap<>();
+    private final List<SimulationObserver> subscribersList = new ArrayList<>();
 
     public Simulation(List<Road> roads) {
         roads.forEach(this::addRoad);
@@ -69,6 +70,18 @@ public class Simulation {
                     .forEach(car -> carsLeavingCrossing.add(car));
         }
 
+        this.notifySimulationStep(carsLeavingCrossing);
+
         return carsLeavingCrossing;
+    }
+
+    private void notifySimulationStep(List<Car> carsLeavingCrossing) {
+        for (SimulationObserver subscriber : this.subscribersList) {
+            subscriber.notifySimulationStep(carsLeavingCrossing);
+        }
+    }
+
+    public void subscribe(SimulationObserver simulationObserver) {
+        this.subscribersList.add(simulationObserver);
     }
 }
