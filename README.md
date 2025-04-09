@@ -261,6 +261,12 @@ application {
 
 #### Running application
 
+> [!IMPORTANT]
+> All the below commands were tested on Ubuntu 24.04
+
+> [!TIP]
+> To run the below commands on Windows replacing *./gradlew* with *.\gradlew.bat* should do the job.
+
 Now to run your application navigate to root folder of this project
 
 ```commandline
