@@ -1,4 +1,4 @@
-package app;
+package api;
 
 import model.input.InputReader;
 import model.output.OutputCollector;

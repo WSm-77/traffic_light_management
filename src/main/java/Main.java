@@ -1,17 +1,11 @@
-import app.TrafficLightManager;
+import api.TrafficLightManager;
 import model.enums.Direction;
 import model.enums.Move;
-import model.input.InputReader;
-import model.output.OutputCollector;
 import model.simulation.Simulation;
-import model.simulation.SimulationRunner;
 import model.traffic.Road;
 import model.traffic.TrafficLane;
 
-import java.io.FileWriter;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 public class Main {
