@@ -6,7 +6,7 @@ public enum Direction {
     SOUTH,
     WEST;
 
-    public static Direction fromString(String direction) {
+    public static Direction fromString(String direction) throws IllegalArgumentException {
         return switch (direction) {
             case "north" -> NORTH;
             case "east" -> EAST;

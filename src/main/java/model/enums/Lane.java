@@ -21,7 +21,7 @@ public enum Lane {
     WEST_STRAIGHT,
     WEST_LEFT;
 
-    public static Lane stringToLane(String start, String end) throws IllegalArgumentException {
+    public static Lane stringToLane(String start, String end) {
         Direction startDirection = Direction.fromString(start);
         Direction endDirection = Direction.fromString(end);
 

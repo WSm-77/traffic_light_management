@@ -4,6 +4,12 @@ import model.enums.Lane;
 
 import java.util.*;
 
+/**
+ * Graph class represents a generic graph structure with vertices and edges.
+ * It supports directed and bidirectional edges, as well as utility methods for graph creation.
+ *
+ * @param <VertexType> The type of vertices in the graph.
+ */
 public class Graph<VertexType> {
     private final Map<VertexType, Set<VertexType>> graphMap = new HashMap<>();
 
@@ -36,6 +42,11 @@ public class Graph<VertexType> {
         this.addDirectedEdge(vertex2, vertex1);
     }
 
+    /**
+     * Adds a vertex to the graph.
+     *
+     * @param vertex The vertex to add.
+     */
     public void addVertex(VertexType vertex) {
         if (this.graphMap.containsKey(vertex)) {
             return;
@@ -44,10 +55,22 @@ public class Graph<VertexType> {
         this.graphMap.put(vertex, new HashSet<>());
     }
 
+    /**
+     * Retrieves all vertices in the graph.
+     *
+     * @return A set of all vertices in the graph.
+     */
     public Set<VertexType> getVertices() {
         return this.graphMap.keySet();
     }
 
+    /**
+     * Retrieves the neighbors of a given vertex.
+     *
+     * @param vertex The vertex whose neighbors are to be retrieved.
+     * @return A set of neighbors of the given vertex.
+     * @throws IllegalArgumentException If the vertex does not exist in the graph.
+     */
     public Set<VertexType> getNeighbours(VertexType vertex) throws IllegalArgumentException {
         if ( ! this.graphMap.containsKey(vertex)) {
             throw new IllegalArgumentException(String.format("Vertex %s does not exist!!!", vertex));
@@ -56,6 +79,13 @@ public class Graph<VertexType> {
         return Collections.unmodifiableSet(this.graphMap.get(vertex));
     }
 
+    /**
+     * Checks if an edge exists between two vertices.
+     *
+     * @param vertex The starting vertex of the edge.
+     * @param neighbour The ending vertex of the edge.
+     * @return `true` if the edge exists, otherwise `false`.
+     */
     public boolean containsEdge(VertexType vertex, VertexType neighbour) {
         if ( ! this.graphMap.containsKey(vertex)) {
             return false;
