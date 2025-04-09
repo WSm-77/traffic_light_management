@@ -10,7 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class collects vehicles that left crossing after each step of simulation.
+ * Output is combined into single map that can be easily converted into json format by calling toString() method.
+ * To use <b>OutputCollector</b> remember to subscribe it to simulation instance.
+ *
+ * <p>Example</p>
+ * <pre>
+ *     Simulation simulation = new Simulation(...);
+ *     OutputCollector collector = new OutputCollector();
+ *
+ *     simulation.subscribe(collector);
+ *     System.out.println(collector);   // prints data in json file structure
+ * </pre>
+ */
 public class OutputCollector implements SimulationObserver {
+    private static final String LEFT_VEHICLES = "leftVehicles";
     private final List<Map<String, List<String>>> stepStatuses = new ArrayList<>();
 
     @Override
@@ -29,7 +44,7 @@ public class OutputCollector implements SimulationObserver {
 
     private Map<String, List<String>> createStepMap(List<String> listOfLeavingCarsNames) {
         HashMap<String, List<String>> stepMap = new HashMap<>();
-        stepMap.put("leftVehicles", listOfLeavingCarsNames);
+        stepMap.put(LEFT_VEHICLES, listOfLeavingCarsNames);
 
         return stepMap;
     }

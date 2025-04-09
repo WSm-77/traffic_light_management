@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MoveTest {
     @Test
-    void testFromInteger_ValidValues() {
+    void fromInteger_ValidValues() {
         assertEquals(Move.RIGHT, Move.fromInteger(0));
         assertEquals(Move.STRAIGHT, Move.fromInteger(1));
         assertEquals(Move.LEFT, Move.fromInteger(2));
     }
 
     @Test
-    void testFromInteger_InvalidNegativeValue() {
+    void fromInteger_InvalidNegativeValue() {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> Move.fromInteger(-1)
@@ -21,7 +21,7 @@ class MoveTest {
     }
 
     @Test
-    void testFromInteger_InvalidLargeValue() {
+    void fromInteger_InvalidLargeValue() {
         int invalidIndex = Move.count();
         assertThrows(
                 IllegalArgumentException.class,
@@ -30,7 +30,7 @@ class MoveTest {
     }
 
     @Test
-    void testCount() {
+    void count() {
         assertEquals(3, Move.count());
     }
 }

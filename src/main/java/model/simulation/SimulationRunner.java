@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * SimulationRunner class serves a role of tool for controlling simulation behaviour with text commands.
+ * This tool is used to convert text commands to correct simulation actions.
+ */
 public class SimulationRunner {
     private static final String COMMAND_TYPE = "type";
     private static final String ADD_VEHICLE = "addVehicle";
@@ -18,7 +22,13 @@ public class SimulationRunner {
         this.simulation = simulation;
     }
 
-    public void runSimulation(List<Map<String, String>> commands) {
+    /**
+     * Runs simulation.
+     *
+     * @param commands Text commands that control simulation behaviour
+     * @throws IllegalArgumentException If encounters unknown or incorrectly structured command
+     */
+    public void runSimulation(List<Map<String, String>> commands) throws IllegalArgumentException {
         for (Map<String, String> command : commands) {
             String commandType = command.get(COMMAND_TYPE);
 
@@ -40,6 +50,12 @@ public class SimulationRunner {
         }
     }
 
+    /**
+     * Creates car object based on the provided command parameters.
+     *
+     * @param command Map that contain command with all its parameters
+     * @return An `Optional` containing the car if correct command is provided, otherwise an empty `Optional`.
+     */
     private Optional<Car> mapToCar(Map<String, String> command) {
         String vehicleName = command.get("vehicleId");
 

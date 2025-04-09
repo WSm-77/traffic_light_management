@@ -9,6 +9,10 @@ import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This class is responsible for reading commands from a JSON file and converting them
+ * into a map structure for further processing.
+ */
 public class InputReader {
     public static Optional<Map<String, List<Map<String, String>>>> readJsonCommands(String pathToJson) {
         Gson gson = new Gson();

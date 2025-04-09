@@ -71,7 +71,10 @@ class GraphVertexLaneTest {
         Graph<Vertex<Lane>> graph = new Graph<>();
         Vertex<Lane> vertex = new Vertex<>(Lane.NORTH_STRAIGHT, 1);
 
-        assertThrows(IllegalArgumentException.class, () -> graph.getNeighbours(vertex));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> graph.getNeighbours(vertex)
+        );
     }
 
     @Test

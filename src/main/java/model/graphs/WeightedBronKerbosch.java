@@ -5,6 +5,17 @@ import model.enums.Lane;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * WeightedBronKerbosh class serves a role of solver for Bron-Kerbosh algorithm for maximum weighted clique finding.
+ * To find maximum weighted clique in weighted graph initialize solver with graph instance and then
+ * call <i>findMaximumWeightClique()</i> method.
+ *
+ * <p>Example</p>
+ * <pre>
+ *     WeightedBronKerbosch weightedBronKerbosch = new WeightedBronKerbosch(graph);
+ *     Set<Vertex<Lane>> maxCliqueVertices = weightedBronKerbosch.findMaximumWeightClique();
+ * </pre>
+ */
 public class WeightedBronKerbosch {
     private final Graph<Vertex<Lane>> graph;
     private int maxCliqueWeight = -1;
@@ -15,7 +26,7 @@ public class WeightedBronKerbosch {
     }
 
     /**
-     * Finds clique with maximum sum of vertices weights
+     * Finds clique with maximum sum of vertices weights.
      *
      * @return Set of vertices creating maximum weight clique
      */
@@ -24,7 +35,7 @@ public class WeightedBronKerbosch {
         Set<Vertex<Lane>> prospective = this.graph.getVertices();
         Set<Vertex<Lane>> excluded = new HashSet<>();
 
-        broneKerbosch(currentClique, prospective, excluded);
+        bronKerbosch(currentClique, prospective, excluded);
 
         return this.maxClique;
     }
@@ -36,7 +47,7 @@ public class WeightedBronKerbosch {
      * @param prospective Prospective vertices that can extend the current clique
      * @param excluded Excluded vertices that have been processed
      */
-    private void broneKerbosch(Set<Vertex<Lane>> currentClique, Set<Vertex<Lane>> prospective, Set<Vertex<Lane>> excluded) {
+    private void bronKerbosch(Set<Vertex<Lane>> currentClique, Set<Vertex<Lane>> prospective, Set<Vertex<Lane>> excluded) {
         // check if currentClique is max weighted clique
         if (prospective.isEmpty() && excluded.isEmpty()) {
             int currentCliqueWeight = this.calculateCliqueWeight(currentClique);
@@ -73,7 +84,7 @@ public class WeightedBronKerbosch {
                 HashSet<Vertex<Lane>> newExcluded = new HashSet<>(excluded);
                 newExcluded.retainAll(vertexNeighbours);
 
-                this.broneKerbosch(newCurrentClique, newProspective, newExcluded);
+                this.bronKerbosch(newCurrentClique, newProspective, newExcluded);
 
                 prospective.remove(vertex);
                 excluded.add(vertex);
@@ -102,10 +113,13 @@ public class WeightedBronKerbosch {
      *
      * @param prospective The non-empty set of vertices to choose the pivot from.
      * @return The vertex with the maximum weight.
+     * @throws IllegalStateException If set of prospective vertices is empty
      */
-    private Vertex<Lane> choosePivotVertex(Set<Vertex<Lane>> prospective) {
+    private Vertex<Lane> choosePivotVertex(Set<Vertex<Lane>> prospective) throws IllegalStateException {
         return prospective.stream()
                 .max((vertex1, vertex2) -> Integer.compare(vertex1.weight(), vertex2.weight()))
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalStateException(
+                        "Can not choose Pivot because set of prospective vertices is empty!!!")
+                );
     }
 }

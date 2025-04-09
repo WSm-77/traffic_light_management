@@ -21,27 +21,34 @@ public enum Lane {
     WEST_STRAIGHT,
     WEST_LEFT;
 
-    public static Lane stringToLane(String start, String end) throws IllegalArgumentException {
-        return switch (start + " " + end) {
-            case "north west" -> NORTH_RIGHT;
-            case "north south" -> NORTH_STRAIGHT;
-            case "north east", "north north" -> NORTH_LEFT;
+    public static Lane stringToLane(String start, String end) {
+        Direction startDirection = Direction.fromString(start);
+        Direction endDirection = Direction.fromString(end);
 
-            case "east north" -> EAST_RIGHT;
-            case "east west" -> EAST_STRAIGHT;
-            case "east south", "east east" -> EAST_LEFT;
+        return switch (startDirection) {
+            case NORTH -> switch(endDirection) {
+                case WEST -> NORTH_RIGHT;
+                case SOUTH -> NORTH_STRAIGHT;
+                case EAST, NORTH -> NORTH_LEFT;
+            };
 
-            case "south east" -> SOUTH_RIGHT;
-            case "south north" -> SOUTH_STRAIGHT;
-            case "south west", "south south" -> SOUTH_LEFT;
+            case EAST -> switch (endDirection) {
+                case NORTH -> EAST_RIGHT;
+                case WEST -> EAST_STRAIGHT;
+                case SOUTH, EAST -> EAST_LEFT;
+            };
 
-            case "west south" -> WEST_RIGHT;
-            case "west east" -> WEST_STRAIGHT;
-            case "west north", "west west" -> WEST_LEFT;
+            case SOUTH -> switch (endDirection) {
+                case EAST -> SOUTH_RIGHT;
+                case NORTH -> SOUTH_STRAIGHT;
+                case WEST, SOUTH -> SOUTH_LEFT;
+            };
 
-            default -> throw new IllegalArgumentException(
-                String.format("Couldn't parse startRoad=%s, endRoad=%s", start, end)
-            );
+            case WEST -> switch (endDirection) {
+                case SOUTH -> WEST_RIGHT;
+                case EAST -> WEST_STRAIGHT;
+                case NORTH, WEST -> WEST_LEFT;
+            };
         };
     }
 
