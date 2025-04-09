@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    getMainClass().set('Main')
+    getMainClass().set('BasicCrossingShowcase')
 }
 
 java {
@@ -28,4 +28,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed" // Show results for all tests
+        showStandardStreams = true // Display output from System.out and System.err
+    }
 }

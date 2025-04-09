@@ -8,7 +8,7 @@ import model.traffic.TrafficLane;
 import java.util.List;
 import java.util.Set;
 
-public class Main {
+public class BasicCrossingShowcase {
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println(String.format("Invalid number of arguments: %d!!!", args.length));
