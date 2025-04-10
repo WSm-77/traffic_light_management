@@ -14,17 +14,22 @@ import java.util.List;
  * each road it creates lanes visualization with information about these lanes current mode and size.
  *
  * <p>Example</p>
- * <pre>
  *
  * Output:
  *
+ * <pre>
  *      Road: SOUTH
  *
- *      | ---: 0 | SOUTH_STRAIGHT: 1 | SOUTH_RIGHT: 1 | SOUTH_RIGHT: 1 |
- *
- * means that there is no car in the first lane, one car going straight and two cars turing right from separate lanes.
+ *      | ---: 0 | SOUTH_STRAIGHT: 1 | SOUTH_RIGHT: 1 | SOUTH_RIGHT: 3 |
  * </pre>
  *
+ * means that there is no car in the first lane, one car goes straight, one car turns right from lane with one car and
+ * one car turns right from lane with 3 cars.
+ *
+ * <p>CAUTION!!!</p>
+ *
+ * SOUTH_RIGHT on the last lane indicates only that the first car turns right. It does not mean that all cars waiting
+ * in this lane will turn right, as this lane can support multiple maneuvers.
  */
 public class SimulationLogger implements SimulationObserver {
     private final Simulation simulation;
