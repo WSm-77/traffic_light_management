@@ -8,6 +8,24 @@ import model.traffic.TrafficLane;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * SimulationLogger serves a role of diagnostic tool that allows simulation tracking. After each change in simulation
+ * SimulationLogger will display current simulation status to the console. SimulationLogger lists all roads and for
+ * each road it creates lanes visualization with information about these lanes current mode and size.
+ *
+ * <p>Example</p>
+ * <pre>
+ *
+ * Output:
+ *
+ *      Road: SOUTH
+ *
+ *      | ---: 0 | SOUTH_STRAIGHT: 1 | SOUTH_RIGHT: 1 | SOUTH_RIGHT: 1 |
+ *
+ * means that there is no car in the first lane, one car going straight and two cars turing right from separate lanes.
+ * </pre>
+ *
+ */
 public class SimulationLogger implements SimulationObserver {
     private final Simulation simulation;
 
