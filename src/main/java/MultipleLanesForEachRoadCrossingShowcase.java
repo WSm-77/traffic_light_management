@@ -19,6 +19,10 @@ public class MultipleLanesForEachRoadCrossingShowcase {
         }
 
         Simulation singleLanesSimulation = getMultipleLanesForMultipleDirectionsSimulation();
+
+        SimulationLogger simulationLogger = new SimulationLogger(singleLanesSimulation);
+        singleLanesSimulation.subscribe(simulationLogger);
+
         TrafficLightManager.runManager(args[0], args[1], singleLanesSimulation);
     }
 

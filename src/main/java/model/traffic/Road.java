@@ -74,4 +74,14 @@ public class Road {
 
         return  laneMapping;
     }
+
+    /**
+     * Retrieves a copy of the list of traffic lanes on the road.
+     * Modifications to the returned list will not affect the original list.
+     *
+     * @return A new list containing all traffic lanes on the road.
+     */
+    public List<TrafficLane> getTrafficLaneList() {
+        return new ArrayList<>(this.trafficLaneList);
+    }
 }

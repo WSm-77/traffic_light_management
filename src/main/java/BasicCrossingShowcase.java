@@ -2,6 +2,7 @@ import api.TrafficLightManager;
 import model.enums.Direction;
 import model.enums.Move;
 import model.simulation.Simulation;
+import model.simulation.SimulationLogger;
 import model.traffic.Road;
 import model.traffic.TrafficLane;
 
@@ -18,6 +19,10 @@ public class BasicCrossingShowcase {
         }
 
         Simulation singleLanesSimulation = getSingleLanesSimulation();
+
+        SimulationLogger simulationLogger = new SimulationLogger(singleLanesSimulation);
+        singleLanesSimulation.subscribe(simulationLogger);
+
         TrafficLightManager.runManager(args[0], args[1], singleLanesSimulation);
     }
 
