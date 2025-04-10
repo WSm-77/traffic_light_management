@@ -129,11 +129,11 @@ To represent situation at crossing in code I have created classes ```TrafficLane
 
 ### Idea
 
-To maximally reduce summary waiting times of vehicles in each simulation step my algorithm selects maximum number of 
-vehicles that can pass through crossing without collisions. Finding maximum number of non-colliding vehicles is being 
-done by utilizing Bron-Kerbosch algorithm for finding maximum weighted clique in weighted graph in which vertices are 
-represented by lane types and edges are represented by no collisions between lane types. Weight of each vertex is 
-a number of vehicles currently occupying given lane type.
+To minimize the total waiting time of vehicles in each simulation step, my algorithm selects the maximum number of 
+vehicles that can pass through the crossing without collisions. Finding the maximum number of non-colliding vehicles is
+done by utilizing the Bron-Kerbosch algorithm for finding the maximum weighted clique in a weighted graph, where vertices
+are represented by lane types and edges represent the absence of collisions between lane types. The weight of each vertex
+is the number of vehicles currently occupying the given lane type.
 
 ### Preparing Simulation
 
@@ -227,9 +227,9 @@ Simulation simulation = new Simulation(List.of(northRoad, eastRoad, southRoad, w
 
 ### Running simulation with commands from JSON file and writing output
 
-For running prepared simulation with provided commands in JSON file ```TrafficLightManager``` class can be used.
-This class provides ```runManager()``` static method which takes path to input JSON file with commands, prepared 
-simulation object and path to output file that will contain information about statuses of each step.
+To run a prepared simulation with provided commands in a JSON file, the ```TrafficLightManager``` class can be used. This 
+class provides the ```runManager()``` static method, which takes the path to the input JSON file with commands, the 
+prepared simulation object, and the path to the output file that will contain information about the statuses of each step.
 
 ```java
 public static void runManager(String pathToInputFile, String pathToOutputFile, Simulation simulation);
@@ -241,13 +241,12 @@ public static void runManager(String pathToInputFile, String pathToOutputFile, S
 
 To utilize commands from JSON file for simulation running:
 
-1. Create new class for application
-2. Prepare simulation and call ```runManager()``` method with specified paths to input and output files
+1. Create a new class for the application
+2. Prepare the simulation and call the ```runManager()``` method with specified paths to input and output files
 inside your ```main()``` function.
 
 #### Gradle setup
-
-Inside *build.gradle* file if necessary add following lines to specify main class of your application:
+Inside the *build.gradle* file, if necessary, add the following lines to specify the main class of your application:
 
 ```groovy
 plugins {
@@ -267,7 +266,7 @@ application {
 > [!TIP]
 > To run the below commands on Windows replacing *./gradlew* with *.\gradlew.bat* should do the job.
 
-Now to run your application navigate to root folder of this project
+Now, to run your application, navigate to root folder of this project
 
 ```commandline
 cd traffic_light_management
@@ -281,7 +280,7 @@ and run application with correct arguments
 
 #### Testing
 
-To run all tests navigate to project root directory and use following gradle command:
+To run all tests, navigate to project root directory and use following gradle command:
 
 ```commandline
 ./gradlew test
@@ -289,9 +288,10 @@ To run all tests navigate to project root directory and use following gradle com
 
 #### Example
 
-This repository provides ```BasicCrossingShowcase``` class which by default is set up as main class for CLI usage in 
-*build.gradle*. There is also prepared *showcase/json_commands/basic_crossing_commands.json* file with commands from 
-[input example](#input). Therefor to create *showcase_output.json* file inside *showcase* directory run following command:
+This repository provides the ```BasicCrossingShowcase``` class which by default is set up as main class for CLI usage in 
+*build.gradle*. There is also a prepared *showcase/json_commands/basic_crossing_commands.json* file with commands from 
+[input example](#input). Therefor, to create a *showcase_output.json* file inside *showcase* directory, run following
+command:
 
 ```commandline
 ./gradlew run --args="showcase/json_commands/basic_crossing_commands.json ./showcase/showcase_output.json"
