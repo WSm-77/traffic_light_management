@@ -133,7 +133,8 @@ To minimize the total waiting time of vehicles in each simulation step, my algor
 vehicles that can pass through the crossing without collisions. Finding the maximum number of non-colliding vehicles is
 done by utilizing the <a href=https://arxiv.org/pdf/1101.1266>Bron-Kerbosch algorithm</a> for finding the maximum weighted 
 clique in a weighted graph, where vertices are represented by lane types and edges represent the absence of collisions 
-between lane types. The weight of each vertex is the number of vehicles currently occupying the given lane type.
+between lane types. The weight of each vertex is the number of vehicles that are first in the vehicles queue and are
+occupying the given lane type.
 
 ### Preparing Simulation
 
