@@ -286,7 +286,7 @@ To run all tests, navigate to project root directory and use following gradle co
 ./gradlew test
 ```
 
-#### Example
+#### Examples
 
 This repository provides the ```BasicCrossingShowcase``` class which by default is set up as main class for CLI usage in 
 *build.gradle*. There is also a prepared *showcase/json_commands/basic_crossing_commands.json* file with commands from 
@@ -298,3 +298,14 @@ command:
 ```
 
 Created *showcase_output.json* structure should match [output example](#expected-output).
+
+To test behaviour of simulation with multiple lanes for each road (image in 
+[Example 2 - Roads with multiple Lanes](#example-2---roads-with-multiple-lanes)) section you can set 
+```MultipleLanesForEachRoadCrossingShowcase``` as a main class in *build.gradle* and use 
+*showcase/json_commands/multiple_lanes_for_each_road_crossing_commands.json*file with commands.
+
+```commandline
+./gradlew run --args="showcase/json_commands/multiple_lanes_for_each_road_crossing_commands.json ./showcase/showcase_output_mult.json"
+```
+
+Both of the above classes utilize ```SimulationLogger``` which helps in simulation tracking.
