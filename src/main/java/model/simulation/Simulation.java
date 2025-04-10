@@ -51,6 +51,8 @@ public class Simulation {
         Direction carDirection = car.lane().getDirection();
         Road road = this.roadsMap.get(carDirection);
         road.addCar(car);
+
+        this.notifyAddVehicle(car);
     }
 
     /**
@@ -114,6 +116,16 @@ public class Simulation {
     }
 
     /**
+     * Retrieves a copy of the current mapping of directions to roads in the simulation.
+     * This ensures the original map remains unmodifiable outside the class.
+     *
+     * @return A new map containing the direction-to-road mappings.
+     */
+    public Map<Direction, Road> getRoadsMap() {
+        return new HashMap<>(this.roadsMap);
+    }
+
+    /**
      * Notify subscribers about cars leaving crossing during current simulation step.
      *
      * @param carsLeavingCrossing List of cars that leave crossing during current simulation step
@@ -121,6 +133,17 @@ public class Simulation {
     private void notifySimulationStep(List<Car> carsLeavingCrossing) {
         for (SimulationObserver subscriber : this.subscribersList) {
             subscriber.notifySimulationStep(carsLeavingCrossing);
+        }
+    }
+
+    /**
+     * Notify subscribers about a new vehicle added to the simulation.
+     *
+     * @param car Car that was added to the simulation
+     */
+    private void notifyAddVehicle(Car car) {
+        for (SimulationObserver subscriber : this.subscribersList) {
+            subscriber.notifyAddVehicle(car);
         }
     }
 

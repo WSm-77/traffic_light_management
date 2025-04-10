@@ -9,7 +9,7 @@ import model.traffic.TrafficLane;
 import java.util.List;
 import java.util.Set;
 
-public class BasicCrossingShowcase {
+public class MultipleLanesForEachRoadCrossingShowcase {
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println(String.format("Invalid number of arguments: %d!!!", args.length));
@@ -18,7 +18,7 @@ public class BasicCrossingShowcase {
             return;
         }
 
-        Simulation singleLanesSimulation = getSingleLanesSimulation();
+        Simulation singleLanesSimulation = getMultipleLanesForMultipleDirectionsSimulation();
 
         SimulationLogger simulationLogger = new SimulationLogger(singleLanesSimulation);
         singleLanesSimulation.subscribe(simulationLogger);
@@ -26,28 +26,41 @@ public class BasicCrossingShowcase {
         TrafficLightManager.runManager(args[0], args[1], singleLanesSimulation);
     }
 
-    private static Simulation getSingleLanesSimulation() {
-        Set<Move> allMoves = Set.of(Move.RIGHT, Move.STRAIGHT, Move.LEFT);
+    private static Simulation getMultipleLanesForMultipleDirectionsSimulation() {
+        Set<Move> left = Set.of(Move.LEFT);
+        Set<Move> straight = Set.of(Move.STRAIGHT);
+        Set<Move> right = Set.of(Move.RIGHT);
+        Set<Move> straightRight = Set.of(Move.STRAIGHT, Move.RIGHT);
+        Set<Move> straightLeft = Set.of(Move.STRAIGHT, Move.LEFT);
 
         Road roadNorth = new Road(
                 Direction.NORTH,
                 List.of(
-                        new TrafficLane(allMoves)
+                        new TrafficLane(right),
+                        new TrafficLane(right),
+                        new TrafficLane(straight),
+                        new TrafficLane(left)
                 ));
         Road roadEast = new Road(
                 Direction.EAST,
                 List.of(
-                        new TrafficLane(allMoves)
+                        new TrafficLane(straightRight),
+                        new TrafficLane(straightLeft)
                 ));
         Road roadSouth = new Road(
                 Direction.SOUTH,
                 List.of(
-                        new TrafficLane(allMoves)
+                        new TrafficLane(right),
+                        new TrafficLane(straightRight),
+                        new TrafficLane(straight),
+                        new TrafficLane(left)
                 ));
         Road roadWest = new Road(
                 Direction.WEST,
                 List.of(
-                        new TrafficLane(allMoves)
+                        new TrafficLane(right),
+                        new TrafficLane(straight),
+                        new TrafficLane(left)
                 ));
 
         return new Simulation(List.of(

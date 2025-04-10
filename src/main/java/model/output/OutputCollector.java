@@ -36,6 +36,11 @@ public class OutputCollector implements SimulationObserver {
         this.stepStatuses.add(stepMap);
     }
 
+    @Override
+    public void notifyAddVehicle(Car vehicle) {
+        /* empty */
+    }
+
     private List<String> getListOfLeavingCarsNames(List<Car> carsLeavingCrossing) {
         return carsLeavingCrossing.stream()
                 .map(Car::name)

@@ -24,19 +24,20 @@ class SimulationTest {
 
     @Test
     void simulation_SingleTrafficLanes() {
+        // given
         Simulation simulation = getSingleLanesSimulation();
 
         Car car1 = new Car("vehicle1", Lane.stringToLane("south", "north"));
         Car car2 = new Car("vehicle2", Lane.stringToLane("north", "south"));
+        Car car3 = new Car("vehicle3", Lane.stringToLane("west", "south"));
+        Car car4 = new Car("vehicle4", Lane.stringToLane("west", "south"));
 
+        // when
         simulation.addVehicle(car1);
         simulation.addVehicle(car2);
 
         List<Car> leftAfterStep1 = simulation.step();
         List<Car> leftAfterStep2 = simulation.step();
-
-        Car car3 = new Car("vehicle3", Lane.stringToLane("west", "south"));
-        Car car4 = new Car("vehicle4", Lane.stringToLane("west", "south"));
 
         simulation.addVehicle(car3);
         simulation.addVehicle(car4);
@@ -44,6 +45,7 @@ class SimulationTest {
         List<Car> leftAfterStep3 = simulation.step();
         List<Car> leftAfterStep4 = simulation.step();
 
+        // then
         assertEquals(2, leftAfterStep1.size());
         assertEquals(0, leftAfterStep2.size());
         assertEquals(1, leftAfterStep3.size());
@@ -159,7 +161,6 @@ class SimulationTest {
 
         // then
         assertEquals(5, leftAfterStep1.size());
-
         assertEquals(Set.of(car2, car3, car4, car5, car7), new HashSet<>(leftAfterStep1));
     }
 
@@ -167,9 +168,9 @@ class SimulationTest {
         Road roadNorth = new Road(
                 Direction.NORTH,
                 List.of(
-                    new TrafficLane(left),
-                    new TrafficLane(straight),
-                    new TrafficLane(right)
+                        new TrafficLane(left),
+                        new TrafficLane(straight),
+                        new TrafficLane(right)
                 ));
         Road roadEast = new Road(
                 Direction.EAST,
@@ -198,6 +199,7 @@ class SimulationTest {
         ));
     }
 
+    // Example 1 - Roads with single Lanes in README.md
     private static Simulation getSingleLanesSimulation() {
         Road roadNorth = new Road(
                 Direction.NORTH,
@@ -225,6 +227,7 @@ class SimulationTest {
         ));
     }
 
+    // Example 2 - Roads with multiple Lanes in README.md
     private static Simulation getMultipleLanesForMultipleDirectionsSimulation() {
         Road roadNorth = new Road(
                 Direction.NORTH,
