@@ -2,9 +2,6 @@
 
 ## Project description
 
-> [!NOTE]
-> This project is a recruitment task to AVSystems company.
-
 This project simulates an intelligent traffic light system for a four-way crossing. The goal is to design and implement 
 a system that dynamically adjusts the traffic light cycles based on traffic density on each road.
 
